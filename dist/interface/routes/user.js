@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const intex_1 = require("../controller/user/sign-up/intex");
+const intex_2 = require("../controller/user/sign-in/intex");
+const auth_1 = require("../middlewares/auth");
+const intex_3 = require("../controller/user/profile/intex");
+const userRoute = express_1.default.Router();
+userRoute.post('/register', intex_1.userSignUp);
+userRoute.post('/login', intex_2.userSignIn);
+userRoute.get('/profile', auth_1.userAuthToken, intex_3.getUserProfile);
+userRoute.put('/change-password');
+userRoute.put('/forget-password');
+userRoute.put('/edit-profile', auth_1.userAuthToken);
+userRoute.put('/edit-address', auth_1.userAuthToken);
+userRoute.put('/add-wishlist', auth_1.userAuthToken);
+userRoute.put('/add-cart', auth_1.userAuthToken);
+exports.default = userRoute;

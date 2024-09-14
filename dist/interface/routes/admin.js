@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const admin_management_1 = require("../controller/admin/admin-management");
+const user_management_1 = require("../controller/user/user-management");
+const product_management_1 = require("../controller/product/product-management");
+const category_management_1 = require("../controller/category/category-management");
+const adminRoute = express_1.default.Router();
+adminRoute.post('/sign-in', admin_management_1.adminSignIn);
+adminRoute.post('/add-admin');
+adminRoute.get('/all-user', user_management_1.getAllUserSearchFilterSortController);
+adminRoute.patch('/block-unblock-user', user_management_1.blockUserController);
+adminRoute.post('/add-product', product_management_1.productCreate);
+adminRoute.get('/all-product', product_management_1.findProductController);
+adminRoute.put('/edit-product', product_management_1.editProductController);
+adminRoute.post('/add-category', category_management_1.createCategory);
+adminRoute.get('/all-category', category_management_1.findCategoryController);
+adminRoute.put('/edit-category', category_management_1.editCategoryController);
+exports.default = adminRoute;
